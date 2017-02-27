@@ -1,7 +1,7 @@
 import pygame
 from pygame.locals import *
 import os, sys
-
+from euclid import *
 
 class FunGameMain:
     """
@@ -47,7 +47,7 @@ class FunGameMain:
         self.smiley = Smiley()
         self.smiley_sprites = pygame.sprite.RenderPlain((self.smiley))
 
-
+ 
 class Smiley(pygame.sprite.Sprite):
     """ make smiley """
     def __init__(self):
@@ -57,6 +57,10 @@ class Smiley(pygame.sprite.Sprite):
         self.rect = image.get_rect()
         self.x_dist = 64
         self.y_dist = 64
+        self.dx = 0
+        self.dy = 0
+        self.ddx = 0
+        self.ddy = 0
 
     def move(self, key):
         x_move = 0
