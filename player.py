@@ -6,12 +6,12 @@ vec = pygame.math.Vector2
 facingRight = True
 applyGravity = True
 
-class Smiley(pygame.sprite.Sprite):
-    """ make smiley """
+class Hambo(pygame.sprite.Sprite):
+    """ make Hambo """
 
     def __init__(self):
         pygame.sprite.Sprite.__init__(self)
-        name = os.path.join('hambo.png')
+        name = os.path.join('hambo_stand.png')
         image = pygame.image.load(name)
         self.image = image.convert()
         self.rect = image.get_rect()

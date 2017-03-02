@@ -47,13 +47,13 @@ class FunGameMain:
         self.gameSprites.update(dt)
 
         # Sees if player hits a platform
-        hits = pygame.sprite.spritecollide(self.smiley, self.platforms, False)
+        hits = pygame.sprite.spritecollide(self.Hambo, self.platforms, False)
         if hits:
-            self.smiley.applyGravity = False
-            self.smiley.vel.y = 0
-            self.smiley.pos.y = self.plat1.rect.top
+            self.Hambo.applyGravity = False
+            self.Hambo.vel.y = 0
+            self.Hambo.pos.y = self.plat1.rect.top
         else:
-            self.smiley.applyGravity = True
+            self.Hambo.applyGravity = True
 
     def draw(self):
         self.screen.blit(self.background, (0, 0))
@@ -61,12 +61,12 @@ class FunGameMain:
         pygame.display.flip()
 
     def LoadSprites(self):
-        self.smiley = Smiley()
+        self.Hambo = Hambo()
         self.plat1 = platform()
 
         # puts all the spites into appropriate groups
         self.platforms = pygame.sprite.Group(self.plat1)
-        self.gameSprites = pygame.sprite.Group(self.smiley, self.plat1)
+        self.gameSprites = pygame.sprite.Group(self.Hambo, self.plat1)
 
 
 if __name__ == "__main__":
