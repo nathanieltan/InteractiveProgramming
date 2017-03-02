@@ -1,10 +1,11 @@
 import pygame
 from pygame.locals import *
 import os, sys
-from environment import*
+from environment import *
 from player import *
 clock = pygame.time.Clock()
 dt = None
+
 
 class FunGameMain:
     """
@@ -33,7 +34,6 @@ class FunGameMain:
             dtime_ms = clock.tick(60)  # gets the tick time in milliseconds
             dt = dtime_ms/1000  # converting the tick time to seconds
 
-
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.display.quit()
@@ -49,8 +49,8 @@ class FunGameMain:
         # Sees if player hits a platform
         hits = pygame.sprite.spritecollide(self.smiley, self.platforms, False)
         if hits:
-            self.smiley.vel.y =0
-            self.smiley.pos.y = self.plat1.rect.top + .5 
+            self.smiley.vel.y = 0
+            self.smiley.pos.y = self.plat1.rect.top + .5
 
     def draw(self):
         self.screen.blit(self.background, (0, 0))
@@ -63,7 +63,8 @@ class FunGameMain:
 
         # puts all the spites into appropriate groups
         self.platforms = pygame.sprite.Group(self.plat1)
-        self.gameSprites = pygame.sprite.Group(self.smiley,self.plat1)
+        self.gameSprites = pygame.sprite.Group(self.smiley, self.plat1)
+
 
 if __name__ == "__main__":
     MainWindow = FunGameMain()

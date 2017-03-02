@@ -2,6 +2,7 @@ import pygame
 from pygame.locals import*
 import os, sys
 
+
 class platform(pygame.sprite.Sprite):
     """Simple Platform"""
 
