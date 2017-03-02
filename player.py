@@ -14,6 +14,7 @@ class Hambo(pygame.sprite.Sprite):
         name = os.path.join('hambo_stand.png')
         image = pygame.image.load(name)
         self.image = image.convert()
+        self.image = image.convert_alpha()
         self.rect = image.get_rect()
         self.pos = vec(100, 100)
         self.vel = vec(0, 0)
@@ -38,7 +39,7 @@ class Hambo(pygame.sprite.Sprite):
             self.accel.x = 0
 
         if keys[pygame.K_UP]:
-            self.vel.y = -100
+            self.vel.y = -200
 
 
         # moves the player
