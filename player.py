@@ -1,8 +1,7 @@
 import pygame
 from pygame.locals import*
 import os, sys
-import math
-
+vec = pygame.math.Vector2
 
 class Smiley(pygame.sprite.Sprite):
     """ make smiley """
@@ -13,27 +12,38 @@ class Smiley(pygame.sprite.Sprite):
         image = pygame.image.load(name)
         self.image = image.convert()
         self.rect = image.get_rect()
-        self.dx = 0
-        self.dy = 0 
-        self.ddx = 0
-        self.ddy = 0
+        self.pos = vec(100,100)
+        self.vel = vec(0,0)
+        self.accel = vec(0,0)
+
     def update(self, dt):
-        self.ddx = 0
+
+        # arrow key input
         keys = pygame.key.get_pressed()
         if keys[pygame.K_LEFT]:
-            self.dx = -100
-        if keys[pygame.K_RIGHT]:
-            self.dx = 100
+            self.accel.x = -300
+        elif keys[pygame.K_RIGHT]:
+            self.accel.x = 300
+        elif not keys[pygame.K_LEFT] and not keys[pygame.K_RIGHT]:
+            self.accel.x = 0
+
+        if keys[pygame.K_UP]:
+            self.vel.y = -100
+
+        # moves the player
         self.move(dt)
+
     def move(self, dt):
-        self.rect.move_ip(self.dx * dt, self.dy*dt)
-        self.dx += self.ddx * dt
-        self.dy += self.ddy * dt
+        # applying friction
+        self.accel.x += self.vel.x * -2
 
-    def decel(self):
-        self.ddx=0
-        if self.dx != 0:
-            pass
+        # Does gravity
+        self.accel = vec(self.accel.x,10000*dt)
 
+        # Movement Calculations
+        self.pos += self.vel * dt + 0.5 * self.accel * (dt ** 2)
+        self.vel += self.accel * dt
 
+        # updates the position
+        self.rect.midbottom = (self.pos)
 

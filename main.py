@@ -1,10 +1,10 @@
 import pygame
 from pygame.locals import *
 import os, sys
-import math
+from environment import*
 from player import *
 clock = pygame.time.Clock()
-
+dt = None
 
 class FunGameMain:
     """
@@ -19,6 +19,7 @@ class FunGameMain:
 
     def MainLoop(self):
         """main loop of game"""
+        global dt
         self.LoadSprites()
 
         # makes it so user can hold down keys
@@ -37,19 +38,32 @@ class FunGameMain:
                 if event.type == pygame.QUIT:
                     pygame.display.quit()
                     sys.exit()
+            self.draw()
+            self.update()
 
-            self.smiley.update(dt)
+    def update(self):
+        # updates sprites
+        global dt
+        self.gameSprites.update(dt)
 
-            # drawing
+        # Sees if player hits a platform
+        hits = pygame.sprite.spritecollide(self.smiley, self.platforms, False)
+        if hits:
+            self.smiley.vel.y =0
+            self.smiley.pos.y = self.plat1.rect.top + .5 
 
-            self.screen.blit(self.background, (0, 0))
-            self.smiley_sprites.draw(self.screen)
-            pygame.display.flip()
+    def draw(self):
+        self.screen.blit(self.background, (0, 0))
+        self.gameSprites.draw(self.screen)
+        pygame.display.flip()
 
     def LoadSprites(self):
         self.smiley = Smiley()
-        self.smiley_sprites = pygame.sprite.RenderPlain((self.smiley))
+        self.plat1 = platform()
 
+        # puts all the spites into appropriate groups
+        self.platforms = pygame.sprite.Group(self.plat1)
+        self.gameSprites = pygame.sprite.Group(self.smiley,self.plat1)
 
 if __name__ == "__main__":
     MainWindow = FunGameMain()
