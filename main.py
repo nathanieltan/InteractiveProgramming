@@ -49,8 +49,11 @@ class FunGameMain:
         # Sees if player hits a platform
         hits = pygame.sprite.spritecollide(self.smiley, self.platforms, False)
         if hits:
+            self.smiley.applyGravity = False
             self.smiley.vel.y = 0
-            self.smiley.pos.y = self.plat1.rect.top + .5
+            self.smiley.pos.y = self.plat1.rect.top
+        else:
+            self.smiley.applyGravity = True
 
     def draw(self):
         self.screen.blit(self.background, (0, 0))

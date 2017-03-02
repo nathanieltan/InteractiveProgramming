@@ -3,13 +3,15 @@ from pygame.locals import*
 import os, sys
 vec = pygame.math.Vector2
 
+facingRight = True
+applyGravity = True
 
 class Smiley(pygame.sprite.Sprite):
     """ make smiley """
 
     def __init__(self):
         pygame.sprite.Sprite.__init__(self)
-        name = os.path.join('smiley.png')
+        name = os.path.join('hambo.png')
         image = pygame.image.load(name)
         self.image = image.convert()
         self.rect = image.get_rect()
@@ -18,18 +20,26 @@ class Smiley(pygame.sprite.Sprite):
         self.accel = vec(0, 0)
 
     def update(self, dt):
-
+        global facingRight
         # arrow key input
         keys = pygame.key.get_pressed()
         if keys[pygame.K_LEFT]:
             self.accel.x = -300
+            if facingRight:
+                facingRight = False
+                self.image = pygame.transform.flip(self.image,True,False)
+
         elif keys[pygame.K_RIGHT]:
             self.accel.x = 300
+            if not facingRight:
+                facingRight = True
+                self.image = pygame.transform.flip(self.image,True,False)
         elif not keys[pygame.K_LEFT] and not keys[pygame.K_RIGHT]:
             self.accel.x = 0
 
         if keys[pygame.K_UP]:
             self.vel.y = -100
+
 
         # moves the player
         self.move(dt)
@@ -39,8 +49,10 @@ class Smiley(pygame.sprite.Sprite):
         self.accel.x += self.vel.x * -2
 
         # Does gravity
-        self.accel = vec(self.accel.x, 10000*dt)
-
+        if applyGravity:
+            self.accel = vec(self.accel.x, 10000*dt)
+        else:
+            self.accel = vec(self.accel.x,0)
         # Movement Calculations
         self.pos += self.vel * dt + 0.5 * self.accel * (dt ** 2)
         self.vel += self.accel * dt
