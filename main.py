@@ -44,16 +44,16 @@ class FunGameMain:
     def update(self):
         # updates sprites
         global dt
-        self.gameSprites.update(dt)
 
         # Sees if player hits a platform
         hits = pygame.sprite.spritecollide(self.Hambo, self.platforms, False)
+        self.Hambo.applyGravity = True
         if hits:
             self.Hambo.applyGravity = False
             self.Hambo.vel.y = 0
-            self.Hambo.pos.y = self.plat1.rect.top
-        else:
-            self.Hambo.applyGravity = True
+            self.Hambo.pos.y = self.plat1.rect.top+1
+
+        self.gameSprites.update(dt)
 
     def draw(self):
         self.screen.blit(self.background, (0, 0))
