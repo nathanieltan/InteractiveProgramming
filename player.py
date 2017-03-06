@@ -47,7 +47,6 @@ class Hambo(pygame.sprite.Sprite):
             if not self.applyGravity:
                 self.vel.y = -350
 
-
         # moves the player
         self.move(dt)
         # calls walking animation
@@ -68,7 +67,8 @@ class Hambo(pygame.sprite.Sprite):
                 self.image = image.convert()
                 self.image = image.convert_alpha()
             if not facingRight:
-                self.image = pygame.transform.flip(self.image,True,False)
+                self.image = pygame.transform.flip(self.image, True, False)
+
     def move(self, dt):
         # applying friction
         self.accel.x += self.vel.x * friction
@@ -77,7 +77,7 @@ class Hambo(pygame.sprite.Sprite):
         if self.applyGravity:
             self.accel = vec(self.accel.x, gravity*dt)
         else:
-            self.accel = vec(self.accel.x,0)
+            self.accel = vec(self.accel.x, 0)
         # Movement Calculations
         self.pos += self.vel * dt + 0.5 * self.accel * (dt ** 2)
         self.vel += self.accel * dt
