@@ -26,9 +26,8 @@ class FunGameMain:
         # makes it so user can hold down keys
         pygame.key.set_repeat(50, 100)
 
-        self.background = pygame.Surface(self.screen.get_size())
+        self.background = pygame.image.load('clouds.jpg')
         self.background = self.background.convert()
-        self.background.fill((0, 0, 0))
 
         while 1:
             dtime_ms = clock.tick(60)  # gets the tick time in milliseconds
