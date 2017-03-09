@@ -61,12 +61,14 @@ class FunGameMain:
                 else:
                     self.Hambo.vel.x = self.Hambo.vel.x * -1
 
+        # sees if player touches a carrot
         eats = pygame.sprite.spritecollide(self.Hambo, self.carrots, True)
         if eats:
             self.Hambo.carrots += 1
 
         self.gameSprites.update(dt)
 
+        # scrolling effect
         if self.Hambo.pos.x >= 500:
             diff = self.Hambo.pos.x - 500
             self.Hambo.pos.x = 500
@@ -81,11 +83,13 @@ class FunGameMain:
         self.screen.blit(self.background, (0, 0))
         self.gameSprites.draw(self.screen)
 
+        # display carrot count
         if pygame.font:
             font = pygame.font.Font(None, 36)
             text = font.render("Carrots %s" % self.Hambo.carrots, 1, (0, 0, 0))
             textpos = text.get_rect(top=100, centerx=self.screen.get_width()/2)
             self.screen.blit(text, textpos)
+
         pygame.display.flip()
 
     def LoadSprites(self):

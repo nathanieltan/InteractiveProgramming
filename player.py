@@ -24,7 +24,7 @@ class Hambo(pygame.sprite.Sprite):
         self.animationFrames = 0  # counts the amount of frames a sprite has been displayed
         self.animationState = 0
 
-        self.carrots = 0
+        self.carrots = 0     # counts how many carrots eaten
 
     def update(self, dt):
         global facingRight
@@ -53,7 +53,6 @@ class Hambo(pygame.sprite.Sprite):
         self.move(dt)
         # calls walking animation
 
-
     def updateAnimation(self):
         self.animationFrames = (self.animationFrames+1) % 30
 
@@ -75,7 +74,7 @@ class Hambo(pygame.sprite.Sprite):
         # applying friction
         self.accel.x += self.vel.x * friction
 
-        # Does gravityt
+        # Does gravity
         if self.applyGravity:
             self.accel = vec(self.accel.x, gravity*dt)
         else:

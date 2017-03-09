@@ -71,6 +71,7 @@ class Level_1(Level):
     def __init__(self):
         Level.__init__(self)
 
+        # initial platform locations
         level = [[100, 600],
                  [200, 500],
                  [300, 700],
@@ -87,6 +88,7 @@ class Level_1(Level):
             block.rect.y = platform[1]
             self.platform_list.add(block)
 
+            # load one carrot on each platform
             carrot = Carrot()
             carrot.rect.x = platform[0] + (block.rect.width / 2)
             carrot.rect.y = platform[1] - block.rect.height
