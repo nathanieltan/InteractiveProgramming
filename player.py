@@ -10,7 +10,7 @@ friction = -3
 class Hambo(pygame.sprite.Sprite):
     """ make Hambo """
 
-    def __init__(self):
+    def __init__(self, carrots=0):
         pygame.sprite.Sprite.__init__(self)
         self.imageNames = ['hambo_walk_1.png','hambo_stand.png','hambo_walk_2.png']
         image = pygame.image.load(self.imageNames[1])
@@ -23,6 +23,8 @@ class Hambo(pygame.sprite.Sprite):
         self.applyGravity = False
         self.animationFrames = 0  # counts the amount of frames a sprite has been displayed
         self.animationState = 0
+
+        self.carrots = 0
 
     def update(self, dt):
         global facingRight
